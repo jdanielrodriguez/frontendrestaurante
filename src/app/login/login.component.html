@@ -1,3 +1,61 @@
-<p>
-  login works!
-</p>
+<div class="login-box">
+  <div class="login-logo">
+    <a><b>Restaurante</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Logueate para iniciar sesion</p>
+
+    <form id="login-form"  #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Correo">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Contraseña">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-7 col-xs-offset-1">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Recordarme
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+        </div>
+        <!-- /.col -->
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <a  [routerLink]="[ './../recovery' ]">Olvide mi contraseña</a><br>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-12">
+          <a  [routerLink]="[ './../register' ]" class="text-center">Registro</a>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<div class="modal fade" id="Loading">
+  <div class="modal-dialog">
+    <div class="text-center" style="margin-top:35%;">
+<loaders-css [loader]="'line-scale'" [loaderClass]="'loader1'" ></loaders-css>
+    </div>
+  </div>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>
+
+
