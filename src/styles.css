@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+.xn-title{
+  color: #ffffff;
+  text-align: center;
+}
+.loader  div  .loader1 {
+  background-color: #1caf9a !important;
+  width: 100px;
+  height: 100px;
+}

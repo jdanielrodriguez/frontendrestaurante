@@ -11,6 +11,9 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-checkbox-dropdown
 import { AdminRoutingModule } from './admin.routing';
 
 import { AdminComponent } from './admin.component';
+import { LoaderComponent } from './loader/loader.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -26,6 +29,9 @@ import { AdminComponent } from './admin.component';
   ],
   declarations: [
     AdminComponent,
+    LoaderComponent,
+    PerfilComponent,
+    DashboardComponent,
   ],
   providers: [
   ]

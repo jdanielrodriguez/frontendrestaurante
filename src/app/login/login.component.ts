@@ -39,7 +39,7 @@ closeResult: string;
   }
 
   login(formValue:any){
-   //console.log(`user: ${formValue.username} pass: ${formValue.password}`)
+  //  console.log(`user: ${formValue.username} pass: ${formValue.password}`)
 
    $('#Loading').css('display','block')
    $('#Loading').addClass('in')
@@ -49,6 +49,7 @@ closeResult: string;
         this.auth = response
         if(response.estado>0){
           // console.log(response.username)
+          // console.log(response)
           let type:string = null;
           localStorage.setItem('currentUser', response.username);
           localStorage.setItem('currentEmail', response.email);

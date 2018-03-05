@@ -6,30 +6,31 @@
   <div class="login-box-body">
     <p class="login-box-msg">Ingresa tu usuario y te enviaremos un correo con tu nueva contraseña.</p>
 
-    <form id="login-form"  #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Correo o Usuario">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <!-- /.col -->
-        <div class="col-xs-4 col-xs-offset-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Enviar</button>
+    <form class="form-horizontal" id="login-form"  #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="username" name="username" required
+                ngModel #username="ngModel" placeholder="Usuario o Email" autofocus/>
+            </div>
         </div>
-        <!-- /.col -->
-      </div>
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Enviar</button>
+            </div>
+            <!-- /.col -->
+          </div>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <a  [routerLink]="[ './../login' ]">Login</a><br>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-12">
-          <a  [routerLink]="[ './../register' ]" class="text-center">Registro</a>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
+          <div class="row">
+            <div class="col-xs-12">
+              <a  [routerLink]="[ './../login' ]">Login</a><br>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-12">
+              <a  [routerLink]="[ './../register' ]" class="text-center">Registro</a>
+            </div>
+            <!-- /.col -->
+          </div>
+      </form>
 
 
   </div>
