@@ -6,7 +6,7 @@ import { path } from "../../../config.module";
 import "rxjs/add/operator/toPromise";
 
 @Injectable()
-export class AccesosService {
+export class RolesService {
 
 	headers = new Headers({'Access-Control-Allow-Origin':'*',
   'cache-control':'no-cache',
@@ -26,7 +26,7 @@ return Promise.reject(error.message || error)
 }
 
     getAll():Promise<any> {
-    let url = `${this.basePath}/api/accesos`
+    let url = `${this.basePath}/api/roles`
       return this.http.get(url)
                       .toPromise()
                         .then(response => {
@@ -36,38 +36,9 @@ return Promise.reject(error.message || error)
                         .catch(this.handleError)
     }
 
-    getModuleAccess(id:number,id2:number):Promise<any> {
-      let url = `${this.basePath}/api/usuarios/${id}/modulos/${id2}`
-        return this.http.get(url)
-                        .toPromise()
-                          .then(response => {
-                            //console.log(response.json())
-                            return response.json()
-                          })
-                          .catch(error => {
-                            if(error.status==404){
-
-                            }
-                          })
-      }
-
-      getAccess(id:number):Promise<any> {
-        let url = `${this.basePath}/api/usuarios/${id}/modulos`
-          return this.http.get(url)
-                          .toPromise()
-                            .then(response => {
-                              //console.log(response.json())
-                              return response.json()
-                            })
-                            .catch(error => {
-                              if(error.status==404){
-
-                              }
-                            })
-        }
 
     create(form):Promise<any> {
-    let url = `${this.basePath}/api/accesos`
+    let url = `${this.basePath}/api/roles`
       return this.http.post(url,form)
                       .toPromise()
                         .then(response => {
@@ -78,7 +49,7 @@ return Promise.reject(error.message || error)
     }
 
     delete(id):Promise<any> {
-    let url = `${this.basePath}/api/accesos/${id}`
+    let url = `${this.basePath}/api/roles/${id}`
       return this.http.delete(url)
                       .toPromise()
                         .then(response => {
@@ -89,7 +60,7 @@ return Promise.reject(error.message || error)
     }
 
     update(form):Promise<any> {
-    let url = `${this.basePath}/api/accesos/${form.id}`
+    let url = `${this.basePath}/api/roles/${form.id}`
       return this.http.put(url,form)
                       .toPromise()
                         .then(response => {
@@ -100,7 +71,7 @@ return Promise.reject(error.message || error)
     }
 
     getSingle(id:number):Promise<any> {
-    let url = `${this.basePath}/api/accesos/${id}`
+    let url = `${this.basePath}/api/roles/${id}`
       return this.http.get(url)
                       .toPromise()
                         .then(response => {

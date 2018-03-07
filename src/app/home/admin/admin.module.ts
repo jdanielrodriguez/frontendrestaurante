@@ -14,6 +14,8 @@ import { AdminComponent } from './admin.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RolesComponent } from './roles/roles.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoaderComponent,
     PerfilComponent,
     DashboardComponent,
+    RolesComponent,
+    UsuariosComponent,
   ],
   providers: [
   ]
