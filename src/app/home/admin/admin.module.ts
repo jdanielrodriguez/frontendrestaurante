@@ -10,12 +10,19 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-checkbox-dropdown
 
 import { AdminRoutingModule } from './admin.routing';
 
+import { EmployeesService } from './_services/employees.service';
+import { ModulosService } from './_services/modulos.service';
+import { SucursalesService } from './_services/sucursales.service';
+
 import { AdminComponent } from './admin.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RolesComponent } from './roles/roles.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { SucursalesComponent } from './sucursales/sucursales.component';
+import { ModulosComponent } from './modulos/modulos.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
 
 @NgModule({
   imports: [
@@ -36,8 +43,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     DashboardComponent,
     RolesComponent,
     UsuariosComponent,
+    SucursalesComponent,
+    ModulosComponent,
+    EmpleadosComponent,
   ],
   providers: [
+    EmployeesService,
+    ModulosService,
+    SucursalesService
   ]
 })
 export class AdminModule { }
