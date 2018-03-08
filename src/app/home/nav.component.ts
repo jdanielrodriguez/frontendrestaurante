@@ -56,11 +56,11 @@ export class NavComponent implements OnInit {
                         if(response.ocultos.length>0){
                           this.modulosOcultos = response.ocultos
                         }
-                        console.log(response);
+                        // console.log(response);
                         console.clear
                       }).catch(error => {
                         console.clear
-                        this.createError(error)
+                        // this.createError(error)
                       })
   }
   permiso(obj:any){
@@ -144,7 +144,7 @@ export class NavComponent implements OnInit {
     this.UsersService.updatePass(data)
                       .then(response => {
                         console.clear
-                        this.create('Usuario Actualizado exitosamente')
+                        this.create('Contraseña cambiada exitosamente')
                         $('#Loading').css('display','none')
                         $("#passwordModal .close").click();
                         $('#pass-form')[0].reset()
