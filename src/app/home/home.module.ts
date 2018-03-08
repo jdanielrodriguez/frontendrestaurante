@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { LoadersCssModule } from 'angular2-loaders-css';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { HomeRoutingModule } from './home.routing';
 import { NavComponent } from './nav.component';
@@ -15,6 +16,7 @@ import { AdminGuard } from "./../_guards/admin.guard";
   imports: [
     CommonModule,
     FormsModule,
+    SimpleNotificationsModule.forRoot(),
     LoadersCssModule,
     HomeRoutingModule
   ],
