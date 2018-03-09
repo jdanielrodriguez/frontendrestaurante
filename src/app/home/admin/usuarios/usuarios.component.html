@@ -29,7 +29,7 @@
           <!-- /.box-header -->
           <div class="box-body">
               <div class="col-xs-3">
-                  <button type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#insertModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Nuevo</button>
+                  <button *ngIf="Agregar==1" type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#insertModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Nuevo</button>
               </div>
             <div class="col-xs-3 col-xs-offset-6">
                 <input type="text" class="form-control" placeholder="Busqueda" [(ngModel)]="search" [ngModelOptions]="{standalone: true}">
