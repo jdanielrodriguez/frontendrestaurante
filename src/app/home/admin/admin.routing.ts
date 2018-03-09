@@ -10,6 +10,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
 import { ModulosComponent } from './modulos/modulos.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { CombosComponent } from './combos/combos.component';
+import { ComidasComponent } from './comidas/comidas.component';
+import { ComidaIngredientesComponent } from './comida-ingredientes/comida-ingredientes.component';
+import { CuentasComponent } from './cuentas/cuentas.component';
+import { EstadisticaComponent } from './estadistica/estadistica.component';
+import { IngredientesComponent } from './ingredientes/ingredientes.component';
+import { MesasComponent } from './mesas/mesas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,6 +27,14 @@ const routes: Routes = [
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'modulos', component: ModulosComponent },
     { path: 'empleados', component: EmpleadosComponent },
+    { path: 'clientes', component: ClientesComponent },
+    { path: 'combos', component: CombosComponent },
+    { path: 'comidas', component: ComidasComponent },
+    { path: 'comida-ingredientes', component: ComidaIngredientesComponent },
+    { path: 'cuentas', component: CuentasComponent },
+    { path: 'estadistica', component: EstadisticaComponent },
+    { path: 'ingredientes', component: IngredientesComponent },
+    { path: 'mesas', component: MesasComponent },
     { path: 'perfil', component: PerfilComponent },
     { path: 'sucursales', component: SucursalesComponent }
   ]},

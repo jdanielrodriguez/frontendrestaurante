@@ -13,6 +13,14 @@ import { AdminRoutingModule } from './admin.routing';
 import { EmployeesService } from './_services/employees.service';
 import { ModulosService } from './_services/modulos.service';
 import { SucursalesService } from './_services/sucursales.service';
+import { ClientesService } from './_services/clientes.service';
+import { CombosService } from './_services/combos.service';
+import { ComidaIngredientesService } from './_services/comida-ingredientes.service';
+import { ComidasService } from './_services/comidas.service';
+import { CuentasService } from './_services/cuentas.service';
+import { IngredientesService } from './_services/ingredientes.service';
+import { MesasService } from './_services/mesas.service';
+import { ComidasMenuService } from './_services/comidas-menu.service';
 
 import { AdminComponent } from './admin.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -23,6 +31,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SucursalesComponent } from './sucursales/sucursales.component';
 import { ModulosComponent } from './modulos/modulos.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
+import { MesasComponent } from './mesas/mesas.component';
+import { ComidasComponent } from './comidas/comidas.component';
+import { CuentasComponent } from './cuentas/cuentas.component';
+import { CombosComponent } from './combos/combos.component';
+import { IngredientesComponent } from './ingredientes/ingredientes.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { ComidaIngredientesComponent } from './comida-ingredientes/comida-ingredientes.component';
+import { EstadisticaComponent } from './estadistica/estadistica.component';
 
 @NgModule({
   imports: [
@@ -46,11 +62,27 @@ import { EmpleadosComponent } from './empleados/empleados.component';
     SucursalesComponent,
     ModulosComponent,
     EmpleadosComponent,
+    MesasComponent,
+    ComidasComponent,
+    CuentasComponent,
+    CombosComponent,
+    IngredientesComponent,
+    ClientesComponent,
+    ComidaIngredientesComponent,
+    EstadisticaComponent,
   ],
   providers: [
     EmployeesService,
     ModulosService,
-    SucursalesService
+    SucursalesService,
+    ClientesService,
+    CombosService,
+    ComidaIngredientesService,
+    ComidasService,
+    CuentasService,
+    IngredientesService,
+    MesasService,
+    ComidasMenuService
   ]
 })
 export class AdminModule { }
