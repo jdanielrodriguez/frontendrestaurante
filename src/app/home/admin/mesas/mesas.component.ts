@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from "./../_services/roles.service";
+import { MesasService } from "./../_services/mesas.service";
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -23,7 +23,7 @@ export class MesasComponent implements OnInit {
   public search:any
   constructor(
     private _service: NotificationsService,
-    private mainService: RolesService
+    private mainService: MesasService
   ) { }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class MesasComponent implements OnInit {
                       .then(response => {
                         this.cargarAll()
                         console.clear
-                        this.create('Rol Ingresado')
+                        this.create('Mesa Ingresado')
                         $('#Loading').css('display','none')
                         $('#insert-form')[0].reset()
                       }).catch(error => {
@@ -84,7 +84,7 @@ export class MesasComponent implements OnInit {
                       .then(response => {
                         this.cargarAll()
                         console.clear
-                        this.create('Rol Actualizado exitosamente')
+                        this.create('Mesa Actualizado exitosamente')
                         $('#Loading').css('display','none')
                       }).catch(error => {
                         console.clear
@@ -102,7 +102,7 @@ export class MesasComponent implements OnInit {
                         .then(response => {
                           this.cargarAll()
                           console.clear
-                          this.create('Rol Eliminado exitosamente')
+                          this.create('Mesa Eliminado exitosamente')
                           $('#Loading').css('display','none')
                         }).catch(error => {
                           console.clear
