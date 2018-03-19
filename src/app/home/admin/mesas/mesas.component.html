@@ -18,6 +18,11 @@
     <div class="col-xs-12">
 
       <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Hover Data Table</h3>
+
+        </div>
+        <!-- /.box-header -->
         <div class="box-body">
             <div class="col-xs-3">
                 <button *ngIf="Agregar==1" type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#insertModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Nuevo</button>
@@ -131,7 +136,38 @@
                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle" ></i> Cancel</button>
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
                             </div>
+                            <div class="form-group col-xs-12 m-b-15" *ngIf="selectedData.cuentas">
+                              <table class="table datatable table-hover table-responsive"  [mfData]="selectedData.cuentas | filter : search1" #mf="mfDataTable"
+                              [mfRowsOnPage]="rowsOnPage">
+                                  <thead>
+                                      <tr>
+                                          <th style="width:80%;">
+                                            <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter></th>
+                                          <th style="width:20%;"></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let data of mf.data">
+                                          <td>{{((data.nombre!=null)?data.nombre:'')}}</td>
+                                          <td>
+
+                                            <button *ngIf="Modificar==1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" (click)="cargarSingle(data.id)" style="cursor:pointer;"><i class="fa fa-edit"></i> Editar</button>
+                                            <button *ngIf="Eliminar==1" type="button" class="btn btn-danger" (click)="delete(data.id)" style="cursor:pointer;"><i class="fa fa-times"></i> Eliminar</button>
+
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                        <td colspan="2" style="width:100%;">
+                                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                              </table>
+                            </div>
                           </form>
+
                       </div>
                       <div class="modal-footer" style="border:none;">
                       </div>
