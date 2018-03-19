@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from "./../_services/roles.service";
+import { CuentasService } from "./../_services/cuentas.service";
+import { MesasService } from "./../_services/mesas.service";
+import { ClientesService } from "./../_services/clientes.service";
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -13,7 +15,10 @@ declare var $: any
 export class CuentasComponent implements OnInit {
   title:string="Cuentas"
   Table:any
+  parentCombo:any
+  secondParentCombo:any
   idRol=+localStorage.getItem('currentRolId');
+  id=+localStorage.getItem('currentId');
   Agregar = +localStorage.getItem('permisoAgregar')
   Modificar = +localStorage.getItem('permisoModificar')
   Eliminar = +localStorage.getItem('permisoEliminar')
@@ -23,11 +28,15 @@ export class CuentasComponent implements OnInit {
   public search:any
   constructor(
     private _service: NotificationsService,
-    private mainService: RolesService
+    private mainService: CuentasService,
+    private parentService: MesasService,
+    private secondParentService: ClientesService
   ) { }
 
   ngOnInit() {
-    this.cargarAll()
+    this.cargarComboParent();
+    this.cargarComboSecondParent();
+    this.cargarAll();
   }
 
   cargarAll(){
@@ -44,6 +53,28 @@ export class CuentasComponent implements OnInit {
                         console.clear
                         this.createError(error)
                         $('#Loading').css('display','none')
+                      })
+  }
+
+  cargarComboParent(){
+    this.parentService.getAll()
+                      .then(response => {
+                        this.parentCombo = response
+                        console.clear
+                      }).catch(error => {
+                        console.clear
+                        this.createError(error)
+                      })
+  }
+
+  cargarComboSecondParent(){
+    this.secondParentService.getAll()
+                      .then(response => {
+                        this.secondParentCombo = response
+                        console.clear
+                      }).catch(error => {
+                        console.clear
+                        this.createError(error)
                       })
   }
 
