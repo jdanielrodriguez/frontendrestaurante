@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from "./../_services/roles.service";
+import { CombosService } from "./../_services/combos.service";
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -23,7 +23,7 @@ export class CombosComponent implements OnInit {
   public search:any
   constructor(
     private _service: NotificationsService,
-    private mainService: RolesService
+    private mainService: CombosService
   ) { }
 
   ngOnInit() {
