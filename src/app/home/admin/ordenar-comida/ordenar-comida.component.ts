@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { CombosService } from "./../_services/combos.service";
+import { Component, OnInit, Input } from '@angular/core';
+import {ActivatedRoute, Params, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { ComidasService } from "./../_services/comidas.service";
 
 import { NotificationsService } from 'angular2-notifications';
+import { Subject } from 'rxjs/Rx';
+import 'rxjs/add/operator/switchMap';
 
 declare var $: any
 
-import { path } from "../../../config.module";
-
 @Component({
-  selector: 'app-combos',
-  templateUrl: './combos.component.html',
-  styleUrls: ['./combos.component.css']
+  selector: 'app-ordenar-comida',
+  templateUrl: './ordenar-comida.component.html',
+  styleUrls: ['./ordenar-comida.component.css']
 })
-export class CombosComponent implements OnInit {
-  title:string="Combos"
+export class OrdenarComidaComponent implements OnInit {
+  @Input() id:any;
   Table:any
+  nombreMesa:any = ''
+  title:string
+  idMesa:any
   idRol=+localStorage.getItem('currentRolId');
   Agregar = +localStorage.getItem('permisoAgregar')
   Modificar = +localStorage.getItem('permisoModificar')
@@ -23,13 +29,26 @@ export class CombosComponent implements OnInit {
   selectedData:any
   public rowsOnPage = 5;
   public search:any
-  private basePath:string = path.path
   constructor(
     private _service: NotificationsService,
-    private mainService: CombosService
+    private route: ActivatedRoute,
+    private location:Location,
+    private router:Router,
+    private mainService: ComidasService
   ) { }
 
   ngOnInit() {
+    this.route.params
+      .switchMap((params: Params) => (params['id']))
+      .subscribe(response => {
+                        this.idMesa+=response
+                    });
+    this.route.params
+      .switchMap((params: Params) => (params['nombre']))
+      .subscribe(response => {
+                        this.nombreMesa+=response
+                    });
+    this.title="Orden para "+this.nombreMesa
     this.cargarAll()
   }
 
@@ -67,46 +86,6 @@ export class CombosComponent implements OnInit {
                       })
 
 
-  }
-
-  subirImagenes(archivo,form,id){
-    $('#Loading').css('display','block')
-    $('#Loading').addClass('in')
-    var archivos=archivo.srcElement.files;
-    let url = `${this.basePath}/api/combos/${form.id}/upload/avatar`
-
-    var i=0;
-    var size=archivos[i].size;
-    var type=archivos[i].type;
-        if(size<(2*(1024*1024))){
-          if(type=="image/png" || type=="image/jpeg" || type=="image/jpg"){
-        $("#"+id).upload(url,
-            {
-              avatar: archivos[i]
-          },
-          function(respuesta)
-          {
-            $('#imgAvatar').attr("src",'')
-            $('#imgAvatar').attr("src",respuesta.picture)
-            $('#Loading').css('display','none')
-            $("#"+id).val('')
-            $("#barra_de_progreso").val(0)
-
-          },
-          function(progreso, valor)
-          {
-
-            $("#barra_de_progreso").val(valor);
-          }
-        );
-          }else{
-            this.createError("El tipo de imagen no es valido")
-            $('#Loading').css('display','none')
-          }
-      }else{
-        this.createError("La imagen es demaciado grande")
-        $('#Loading').css('display','none')
-      }
   }
 
   cargarSingle(id:number){

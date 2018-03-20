@@ -52,6 +52,7 @@
         "./assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
         "./assets/bower_components/fastclick/lib/fastclick.js",
         "./assets/js/adminlte.min.js",
+        "./assets/js/upload.js",
         "./assets/js/demo.js"
       ],
       "environmentSource": "environments/environment.ts",

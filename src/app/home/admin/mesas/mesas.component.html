@@ -46,6 +46,7 @@
 
                           <button *ngIf="Modificar==1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" (click)="cargarSingle(data.id)" style="cursor:pointer;"><i class="fa fa-edit"></i> Editar</button>
                           <button *ngIf="Eliminar==1" type="button" class="btn btn-danger" (click)="delete(data.id)" style="cursor:pointer;"><i class="fa fa-times"></i> Eliminar</button>
+                          <a class="btn btn-warning" [routerLink]="[ './../ordenar',data.id,data.nombre ]" style="cursor:pointer;"><i class="fa fa-hand-pointer-o"></i> Seleccionar</a>
 
                         </td>
                     </tr>
