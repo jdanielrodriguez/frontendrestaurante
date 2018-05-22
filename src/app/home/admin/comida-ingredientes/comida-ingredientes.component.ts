@@ -22,6 +22,7 @@ export class ComidaIngredientesComponent implements OnInit {
   Eliminar = +localStorage.getItem('permisoEliminar')
   Mostrar = +localStorage.getItem('permisoMostrar')
   selectedData:any
+  parentCombo:any
   public rowsOnPage = 5;
   public search:any
   private basePath:string = path.path
@@ -112,13 +113,62 @@ export class ComidaIngredientesComponent implements OnInit {
   }
 
   cargarSingle(id:number){
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
     this.mainService.getSingle(id)
                       .then(response => {
                         this.selectedData = response;
+                        this.cargarIngredientes(response.id);
+                        $('#Loading').css('display','none')
                       }).catch(error => {
+                        $('#Loading').css('display','none')
                         console.clear
                         this.createError(error)
                       })
+  }
+
+  cargarIngredientes(id:number){
+    this.secondService.getIngredientes(id)
+                      .then(response => {
+                        this.parentCombo = response;
+                        $('#Loading').css('display','none')
+                        // console.log(response);
+                      }).catch(error => {
+                        $('#Loading').css('display','none')
+                        console.clear
+                        this.createError(error)
+                      })
+  }
+
+  cambiarIngre(obj,id,addid){
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
+    let value = $('#'+obj).prop('checked')
+    if(value){
+      let data = {
+        comida: this.selectedData.id,
+        ingrediente: id
+      }
+      this.secondService.create(data)
+                      .then(response => {
+                        $('#Loading').css('display','none')
+                        // console.log(response);
+                      }).catch(error => {
+                        $('#Loading').css('display','none')
+                        console.clear
+                        this.createError(error)
+                      })
+    }else{
+      this.secondService.delete(addid)
+                      .then(response => {
+                        $('#Loading').css('display','none')
+                        // console.log(response);
+                      }).catch(error => {
+                        $('#Loading').css('display','none')
+                        console.clear
+                        this.createError(error)
+                      })
+    }
   }
 
   update(formValue:any){
