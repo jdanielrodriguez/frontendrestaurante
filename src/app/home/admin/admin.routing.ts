@@ -14,6 +14,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { CombosComponent } from './combos/combos.component';
 import { ComidasComponent } from './comidas/comidas.component';
 import { ComidaIngredientesComponent } from './comida-ingredientes/comida-ingredientes.component';
+import { ComboIngredientesComponent } from './combo-ingredientes/combo-ingredientes.component';
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { IngredientesComponent } from './ingredientes/ingredientes.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'combos', component: CombosComponent },
     { path: 'comidas', component: ComidasComponent },
     { path: 'comida-ingredientes', component: ComidaIngredientesComponent },
+    { path: 'combo-ingredientes', component: ComboIngredientesComponent },
     { path: 'cuentas', component: CuentasComponent },
     { path: 'estadistica', component: EstadisticaComponent },
     { path: 'ingredientes', component: IngredientesComponent },

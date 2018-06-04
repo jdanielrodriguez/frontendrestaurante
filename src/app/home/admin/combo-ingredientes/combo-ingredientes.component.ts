@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CombosService } from "./../_services/combos.service";
+import { ComidaIngredientesService } from "./../_services/comida-ingredientes.service";
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -8,11 +9,11 @@ declare var $: any
 import { path } from "../../../config.module";
 
 @Component({
-  selector: 'app-combos',
-  templateUrl: './combos.component.html',
-  styleUrls: ['./combos.component.css']
+  selector: 'app-combo-ingredientes',
+  templateUrl: './combo-ingredientes.component.html',
+  styleUrls: ['./combo-ingredientes.component.css']
 })
-export class CombosComponent implements OnInit {
+export class ComboIngredientesComponent implements OnInit {
   title:string="Comidas"
   Table:any
   idRol=+localStorage.getItem('currentRolId');
@@ -21,12 +22,14 @@ export class CombosComponent implements OnInit {
   Eliminar = +localStorage.getItem('permisoEliminar')
   Mostrar = +localStorage.getItem('permisoMostrar')
   selectedData:any
+  parentCombo:any
   public rowsOnPage = 5;
   public search:any
   private basePath:string = path.path
   constructor(
     private _service: NotificationsService,
-    private mainService: CombosService
+    private mainService: CombosService,
+    private secondService: ComidaIngredientesService
   ) { }
 
   ngOnInit() {
@@ -73,7 +76,7 @@ export class CombosComponent implements OnInit {
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
     var archivos=archivo.srcElement.files;
-    let url = `${this.basePath}/api/comidas/${form.id}/upload/avatar`
+    let url = `${this.basePath}/api/combos/${form.id}/upload/avatar`
 
     var i=0;
     var size=archivos[i].size;
@@ -110,13 +113,62 @@ export class CombosComponent implements OnInit {
   }
 
   cargarSingle(id:number){
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
     this.mainService.getSingle(id)
                       .then(response => {
                         this.selectedData = response;
+                        this.cargarIngredientes(response.id);
+                        $('#Loading').css('display','none')
                       }).catch(error => {
+                        $('#Loading').css('display','none')
                         console.clear
                         this.createError(error)
                       })
+  }
+
+  cargarIngredientes(id:number){
+    this.secondService.getIngredientesCombos(id)
+                      .then(response => {
+                        this.parentCombo = response;
+                        $('#Loading').css('display','none')
+                        // console.log(response);
+                      }).catch(error => {
+                        $('#Loading').css('display','none')
+                        console.clear
+                        this.createError(error)
+                      })
+  }
+
+  cambiarIngre(obj,id,addid){
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
+    let value = $('#'+obj).prop('checked')
+    if(value){
+      let data = {
+        combo: this.selectedData.id,
+        ingrediente: id
+      }
+      this.secondService.create(data)
+                      .then(response => {
+                        $('#Loading').css('display','none')
+                        // console.log(response);
+                      }).catch(error => {
+                        $('#Loading').css('display','none')
+                        console.clear
+                        this.createError(error)
+                      })
+    }else{
+      this.secondService.delete(addid)
+                      .then(response => {
+                        $('#Loading').css('display','none')
+                        // console.log(response);
+                      }).catch(error => {
+                        $('#Loading').css('display','none')
+                        console.clear
+                        this.createError(error)
+                      })
+    }
   }
 
   update(formValue:any){
