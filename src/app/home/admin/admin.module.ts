@@ -41,6 +41,7 @@ import { ComidaIngredientesComponent } from './comida-ingredientes/comida-ingred
 import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { OrdenarComidaComponent } from './ordenar-comida/ordenar-comida.component';
 import { ComboIngredientesComponent } from './combo-ingredientes/combo-ingredientes.component';
+import { MenusComponent } from './menus/menus.component';
 
 @NgModule({
   imports: [
@@ -74,6 +75,7 @@ import { ComboIngredientesComponent } from './combo-ingredientes/combo-ingredien
     EstadisticaComponent,
     OrdenarComidaComponent,
     ComboIngredientesComponent,
+    MenusComponent,
   ],
   providers: [
     EmployeesService,
