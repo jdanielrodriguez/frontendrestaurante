@@ -34,9 +34,11 @@
             [mfRowsOnPage]="rowsOnPage">
                 <thead>
                     <tr>
-                        <th style="width:80%;">
+                        <th style="width:40%;">
                           <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter></th>
-                        <th style="width:80%;">
+                        <th style="width:40%;">
+                          <mfDefaultSorter by="codigo">Codigo</mfDefaultSorter></th>
+                        <th style="width:10%;">
                           <mfDefaultSorter by="costo">Total</mfDefaultSorter></th>
                         <th style="width:20%;"></th>
                     </tr>
@@ -44,11 +46,14 @@
                 <tbody>
                     <tr *ngFor="let data of mf.data">
                         <td>{{((data.nombre!=null)?data.nombre:'')}}</td>
+                        <td>{{((data.codigo!=null)?data.codigo:'')}}</td>
                         <td>{{((data.costo!=null)?data.costo:'')}}</td>
                         <td>
 
                           <button *ngIf="Modificar==1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" (click)="cargarSingle(data.id)" style="cursor:pointer;"><i class="fa fa-edit"></i> Editar</button>
                           <button *ngIf="Eliminar==1" type="button" class="btn btn-danger" (click)="delete(data.id)" style="cursor:pointer;"><i class="fa fa-times"></i> Eliminar</button>
+                          <a *ngIf="data.codigo" class="btn btn-warning" [routerLink]="[ './../ordenar',data.id,data.codigo ]" style="cursor:pointer;"><i class="fa fa-hand-pointer-o"></i> Seleccionar</a>
+                          <a *ngIf="!data.codigo" class="btn btn-warning" [routerLink]="[ './../ordenar',data.id,data.nombre ]" style="cursor:pointer;"><i class="fa fa-hand-pointer-o"></i> Seleccionar</a>
 
                         </td>
                     </tr>

@@ -21,6 +21,7 @@ import { CuentasService } from './_services/cuentas.service';
 import { IngredientesService } from './_services/ingredientes.service';
 import { MesasService } from './_services/mesas.service';
 import { ComidasMenuService } from './_services/comidas-menu.service';
+import { MenusService } from './_services/menus.service';
 
 import { AdminComponent } from './admin.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -83,6 +84,7 @@ import { MenusComponent } from './menus/menus.component';
     SucursalesService,
     ClientesService,
     CombosService,
+    MenusService,
     ComidaIngredientesService,
     ComidasService,
     CuentasService,

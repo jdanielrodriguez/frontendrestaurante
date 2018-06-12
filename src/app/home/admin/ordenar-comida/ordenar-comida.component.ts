@@ -3,6 +3,8 @@ import {ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { ComidasService } from "./../_services/comidas.service";
+import { MenusService } from "./../_services/menus.service";
+import { ComidasMenuService } from "./../_services/comidas-menu.service";
 
 import { NotificationsService } from 'angular2-notifications';
 import { Subject } from 'rxjs/Rx';
@@ -18,9 +20,11 @@ declare var $: any
 export class OrdenarComidaComponent implements OnInit {
   @Input() id:any;
   Table:any
+  comidas:any
   nombreMesa:any = ''
   title:string
-  idMesa:any
+  idMesa:any = ''
+  nuevo:any = 0
   idRol=+localStorage.getItem('currentRolId');
   Agregar = +localStorage.getItem('permisoAgregar')
   Modificar = +localStorage.getItem('permisoModificar')
@@ -34,7 +38,9 @@ export class OrdenarComidaComponent implements OnInit {
     private route: ActivatedRoute,
     private location:Location,
     private router:Router,
-    private mainService: ComidasService
+    private mainService: MenusService,
+    private childService: ComidasService,
+    private secondChildService: ComidasMenuService
   ) { }
 
   ngOnInit() {
@@ -48,18 +54,16 @@ export class OrdenarComidaComponent implements OnInit {
       .subscribe(response => {
                         this.nombreMesa+=response
                     });
-    this.title="Orden para "+this.nombreMesa
+    this.title="Orden para cuenta No. "+this.nombreMesa
     this.cargarAll()
   }
 
   cargarAll(){
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
-    this.mainService.getAll()
+    this.mainService.getAllByCuenta(this.idMesa)
                       .then(response => {
                         this.Table = response
-                        $("#editModal .close").click();
-                        $("#insertModal .close").click();
                         $('#Loading').css('display','none')
                         console.clear
                       }).catch(error => {
@@ -72,11 +76,14 @@ export class OrdenarComidaComponent implements OnInit {
   insert(formValue:any){
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
+    formValue.cuenta = this.idMesa;
+    formValue.costo = 0;
     this.mainService.create(formValue)
                       .then(response => {
                         this.cargarAll()
                         console.clear
-                        this.create('Rol Ingresado')
+                        this.create('Menu Ingresado')
+                        $("#insertModal .close").click();
                         $('#Loading').css('display','none')
                         $('#insert-form')[0].reset()
                       }).catch(error => {
@@ -87,14 +94,54 @@ export class OrdenarComidaComponent implements OnInit {
 
 
   }
+  agregarComida(data)
+  {
 
-  cargarSingle(id:number){
-    this.mainService.getSingle(id)
+    let formValue = {
+      comida: data.id,
+      menu:this.selectedData.id,
+      costo:0
+    }
+    if(data.agregado==0){
+      data.agregado=1
+      this.secondChildService.create(formValue)
+                        .then(response => {
+                          data.addId = response.id
+                          console.clear
+                          this.create('Menu Ingresado')
+                          $('#Loading').css('display','none')
+                        }).catch(error => {
+                          console.clear
+                          this.createError(error)
+                          $('#Loading').css('display','none')
+                        })
+    }else{
+      data.agregado=0
+      this.secondChildService.delete(data.addId)
+                        .then(response => {
+                          console.clear
+                          this.create('Menu Ingresado')
+                          $('#Loading').css('display','none')
+                        }).catch(error => {
+                          console.clear
+                          this.createError(error)
+                          $('#Loading').css('display','none')
+                        })
+    }
+  }
+  cargarSingle(data){
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
+    this.selectedData = data
+    let id:number = data.id
+    this.childService.getComidasByMenu(id)
                       .then(response => {
-                        this.selectedData = response;
+                        this.comidas = response;
+                        $('#Loading').css('display','none')
                       }).catch(error => {
                         console.clear
                         this.createError(error)
+                        $('#Loading').css('display','none')
                       })
   }
 
@@ -106,7 +153,8 @@ export class OrdenarComidaComponent implements OnInit {
                       .then(response => {
                         this.cargarAll()
                         console.clear
-                        this.create('Rol Actualizado exitosamente')
+                        $("#editModal .close").click();
+                        this.create('Menu Actualizado exitosamente')
                         $('#Loading').css('display','none')
                       }).catch(error => {
                         console.clear
@@ -124,7 +172,7 @@ export class OrdenarComidaComponent implements OnInit {
                         .then(response => {
                           this.cargarAll()
                           console.clear
-                          this.create('Rol Eliminado exitosamente')
+                          this.create('Menu Eliminado exitosamente')
                           $('#Loading').css('display','none')
                         }).catch(error => {
                           console.clear

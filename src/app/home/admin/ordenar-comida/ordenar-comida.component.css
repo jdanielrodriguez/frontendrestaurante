@@ -1,0 +1,12 @@
+.contenedor{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+.contenedor .centrado{
+  position: absolute;
+  top: 80%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}

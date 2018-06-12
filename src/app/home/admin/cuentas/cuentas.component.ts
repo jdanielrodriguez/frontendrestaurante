@@ -79,6 +79,9 @@ export class CuentasComponent implements OnInit {
   }
 
   insert(formValue:any){
+    this.id=+localStorage.getItem('currentId');
+    formValue.usuario=this.id;
+    formValue.codigo = this.generar(5);
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
     this.mainService.create(formValue)
@@ -144,6 +147,15 @@ export class CuentasComponent implements OnInit {
       $('#Loading').css('display','none')
     }
 
+  }
+
+  generar(longitud)
+  {
+    let i:number
+    var caracteres = "1234567890";
+    var contraseña = "";
+    for (i=0; i<longitud; i++) contraseña += caracteres.charAt(Math.floor(Math.random()*caracteres.length));
+    return contraseña;
   }
 
   public options = {
