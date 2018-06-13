@@ -6,8 +6,7 @@ import { path } from "../../../config.module";
 import "rxjs/add/operator/toPromise";
 
 @Injectable()
-export class ComidasMenuService {
-
+export class ComidasMenuIngredienteService {
 	headers = new Headers({'Access-Control-Allow-Origin':'*',
   'cache-control':'no-cache',
   'server':'Apache/2.4.18 (Ubuntu)',
@@ -26,7 +25,7 @@ return Promise.reject(error.message || error)
 }
 
     getAll():Promise<any> {
-    let url = `${this.basePath}/api/comidamenu`
+    let url = `${this.basePath}/api/comidamenuingrediente`
       return this.http.get(url)
                       .toPromise()
                         .then(response => {
@@ -38,7 +37,7 @@ return Promise.reject(error.message || error)
 
 
     create(form):Promise<any> {
-    let url = `${this.basePath}/api/comidamenu`
+    let url = `${this.basePath}/api/comidamenuingrediente`
       return this.http.post(url,form)
                       .toPromise()
                         .then(response => {
@@ -49,7 +48,7 @@ return Promise.reject(error.message || error)
     }
 
     delete(id):Promise<any> {
-    let url = `${this.basePath}/api/comidamenu/${id}`
+    let url = `${this.basePath}/api/comidamenuingrediente/${id}`
       return this.http.delete(url)
                       .toPromise()
                         .then(response => {
@@ -60,7 +59,7 @@ return Promise.reject(error.message || error)
     }
 
     update(form):Promise<any> {
-    let url = `${this.basePath}/api/comidamenu/${form.id}`
+    let url = `${this.basePath}/api/comidamenuingrediente/${form.id}`
       return this.http.put(url,form)
                       .toPromise()
                         .then(response => {
@@ -71,18 +70,7 @@ return Promise.reject(error.message || error)
     }
 
     getSingle(id:number):Promise<any> {
-    let url = `${this.basePath}/api/comidamenu/${id}`
-      return this.http.get(url)
-                      .toPromise()
-                        .then(response => {
-                          //console.log(response.json())
-                          return response.json()
-                        })
-                        .catch(this.handleError)
-    }
-
-    getIngredientes(id:number,comida:number):Promise<any> {
-    let url = `${this.basePath}/api/ingrediente/comidamenu/${id}/${comida}`
+    let url = `${this.basePath}/api/comidamenuingrediente/${id}`
       return this.http.get(url)
                       .toPromise()
                         .then(response => {

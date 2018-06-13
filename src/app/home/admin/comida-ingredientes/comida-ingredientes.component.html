@@ -27,7 +27,7 @@
             <div class="col-xs-3">
                 <!-- <button *ngIf="Agregar==1" type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#insertModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Nuevo</button> -->
             </div>
-          <div class="col-xs-3 col-xs-offset-6">
+            <div class="col-xs-3 col-xs-offset-6">
               <input type="text" class="form-control" placeholder="Busqueda" [(ngModel)]="search" [ngModelOptions]="{standalone: true}">
           </div>
           <table class="table datatable table-hover table-responsive"  [mfData]="Table | filter : search" #mf="mfDataTable"
@@ -146,7 +146,7 @@
                               <div class="checkbox col-xs-6" *ngFor="let data of parentCombo">
                                 <label>
                                   <input type="checkbox" id="ingrediente{{data.id}}" name="ingrediente{{data.id}}" required
-                                          ngModel #ingrediente{{data.id}}="ngModel" [(ngModel)]="data.agregado" (change)="cambiarIngre('ingrediente'+data.id,data.id,data.addId)"> {{data.nombre}}
+                                          ngModel #ingrediente{{data.id}}="ngModel" [(ngModel)]="data.agregado" (change)="cambiarIngre('ingrediente'+data.id,data.id,data)"> {{data.nombre}}
                                 </label>
                               </div>
                             </div>

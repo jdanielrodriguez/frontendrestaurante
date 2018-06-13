@@ -1,11 +1,11 @@
 <section class="content-header">
     <h1>
         {{title}}
-      <small>Admin</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Tables</a></li>
+      <li><a href="#">Admin</a></li>
+      <li><a (click)="goBack()">Cuentas</a></li>
       <li class="active">{{title}}</li>
     </ol>
   </section>
@@ -24,6 +24,11 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-warning btn-block margin-bottom" (click)="goBack()" style="cursor:pointer;"><i class="fa fa-arrow-left"></i>  Regresar</button>
+            </div>
+            <div class="col-xs-2 col-xs-offset-10">
+            </div>
               <div class="col-xs-3">
                   <button *ngIf="Agregar==1" type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#insertModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Nuevo</button>
               </div>
@@ -46,7 +51,7 @@
 
                             <button *ngIf="Modificar==1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" (click)="cargarSingle(data)" style="cursor:pointer;"><i class="fa fa-edit"></i> Editar</button>
                             <button *ngIf="Eliminar==1" type="button" class="btn btn-danger" (click)="delete(data)" style="cursor:pointer;"><i class="fa fa-times"></i> Eliminar</button>
-                            <a class="btn btn-warning" [routerLink]="[ './../ordenar',data.id,data.nombre ]" style="cursor:pointer;"><i class="fa fa-hand-pointer-o"></i> Seleccionar</a>
+                            <!-- <a class="btn btn-warning" style="cursor:pointer;" (click)="pagarCuenta(data);"><i class="fa fa-dollar"></i> Pagar</a> -->
 
                           </td>
                       </tr>
@@ -117,7 +122,7 @@
                         </div>
                         <div>
                             <form id="edit-form"  #EditForm="ngForm" (ngSubmit)="update(EditForm.value)">
-                              <div class="col-md-6 " style="height:280px;" *ngFor="let data of comidas">
+                              <div class="col-md-6 m-b-15" style="height:280px;margin-bottom:2%;" *ngFor="let data of comidas">
                                 <div [ngClass]="(data.agregado==1)?'alert-success':'alert-danger'" class="btn btn-app contenedor" style="height:100%;">
                                   <a  (click)="agregarComida(data)">
                                           <img *ngIf="!data.foto" src="http://placehold.it/470x300/B2611C/60FF66&text={{data.nombre}}" style="height:100%;">
@@ -126,7 +131,7 @@
                                             {{data.nombre}}
                                           </div>
                                   </a>
-                                  <button type="button" class="btn btn-primary btn-block margin-bottom centrado" data-toggle="modal" data-target="#ingredientesModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Ingredientes</button>
+                                  <button *ngIf="data.agregado==1" (click)="agregarIngredientes(data)" type="button" class="btn btn-primary btn-block margin-bottom centrado" data-toggle="modal" data-target="#ingredientesModal" style="cursor:pointer;"><i class="fa fa-plus"></i>  Ingredientes</button>
 
                                 </div>
 
@@ -152,12 +157,12 @@
                         </div>
                         <div>
                             <form id="ingrediente-form"  #IngredienteForm="ngForm" (ngSubmit)="update(IngredienteForm.value)">
-                              <div class="col-md-6 " style="height:280px;" *ngFor="let data of comidas">
-                                <div [ngClass]="(data.agregado==1)?'alert-success':'alert-danger'" class="btn btn-app contenedor" style="height:100%;">
-                                          <img *ngIf="!data.foto" src="http://placehold.it/470x300/B2611C/60FF66&text={{data.nombre}}" style="height:100%;">
-                                          <img *ngIf="data.foto" src="{{data.foto}}" style="height:100%;">
-                                          <div *ngIf="data.foto" class="carousel-caption">
-                                            {{data.nombre}}
+                              <div class="col-md-6 " style="height:280px;" *ngFor="let data2 of ingredientes">
+                                <div [ngClass]="(data2.agregado==1)?'alert-success':'alert-danger'" class="btn btn-app contenedor" style="height:100%;" (click)="quitarIngrediente(data2)">
+                                          <img *ngIf="!data2.foto" src="http://placehold.it/470x300/B2611C/60FF66&text={{data2.ingrediente.nombre}}" style="height:100%;">
+                                          <img *ngIf="data2.foto" src="{{data2.foto}}" style="height:100%;">
+                                          <div *ngIf="data2.foto" class="carousel-caption">
+                                            {{data2.ingrediente.nombre}}
                                           </div>
 
                                 </div>

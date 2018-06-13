@@ -22,6 +22,7 @@ import { IngredientesService } from './_services/ingredientes.service';
 import { MesasService } from './_services/mesas.service';
 import { ComidasMenuService } from './_services/comidas-menu.service';
 import { MenusService } from './_services/menus.service';
+import { ComidasMenuIngredienteService } from './_services/comidas-menu-ingrediente.service';
 
 import { AdminComponent } from './admin.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -43,6 +44,7 @@ import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { OrdenarComidaComponent } from './ordenar-comida/ordenar-comida.component';
 import { ComboIngredientesComponent } from './combo-ingredientes/combo-ingredientes.component';
 import { MenusComponent } from './menus/menus.component';
+import { CuentasPagadasComponent } from './cuentas-pagadas/cuentas-pagadas.component';
 
 @NgModule({
   imports: [
@@ -77,6 +79,7 @@ import { MenusComponent } from './menus/menus.component';
     OrdenarComidaComponent,
     ComboIngredientesComponent,
     MenusComponent,
+    CuentasPagadasComponent,
   ],
   providers: [
     EmployeesService,
@@ -88,6 +91,7 @@ import { MenusComponent } from './menus/menus.component';
     ComidaIngredientesService,
     ComidasService,
     CuentasService,
+    ComidasMenuIngredienteService,
     IngredientesService,
     MesasService,
     ComidasMenuService

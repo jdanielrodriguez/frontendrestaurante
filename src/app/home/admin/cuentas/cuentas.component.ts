@@ -39,10 +39,38 @@ export class CuentasComponent implements OnInit {
     this.cargarAll();
   }
 
+  pagarCuenta(data)
+  {
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
+    let formValue = {
+      estado:2,
+      id:data.id
+    }
+
+    //console.log(data)
+    if(confirm("¿Desea pagar la cuenta?")){
+      this.mainService.update(formValue)
+                        .then(response => {
+                          this.cargarAll()
+                          console.clear
+                          $("#editModal .close").click();
+                          this.create('Menu Actualizado exitosamente')
+                          $('#Loading').css('display','none')
+                        }).catch(error => {
+                          console.clear
+                          this.createError(error)
+                          $('#Loading').css('display','none')
+                        })
+    }else{
+      $('#Loading').css('display','none')
+    }
+  }
+
   cargarAll(){
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
-    this.mainService.getAll()
+    this.mainService.getAllHabilitado()
                       .then(response => {
                         this.Table = response
                         $("#editModal .close").click();

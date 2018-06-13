@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { ComidasService } from "./../_services/comidas.service";
 import { MenusService } from "./../_services/menus.service";
 import { ComidasMenuService } from "./../_services/comidas-menu.service";
+import { ComidasMenuIngredienteService } from "./../_services/comidas-menu-ingrediente.service";
 
 import { NotificationsService } from 'angular2-notifications';
 import { Subject } from 'rxjs/Rx';
@@ -21,10 +22,12 @@ export class OrdenarComidaComponent implements OnInit {
   @Input() id:any;
   Table:any
   comidas:any
+  ingredientes:any
   nombreMesa:any = ''
   title:string
   idMesa:any = ''
   nuevo:any = 0
+  canti:any = 0
   idRol=+localStorage.getItem('currentRolId');
   Agregar = +localStorage.getItem('permisoAgregar')
   Modificar = +localStorage.getItem('permisoModificar')
@@ -40,7 +43,8 @@ export class OrdenarComidaComponent implements OnInit {
     private router:Router,
     private mainService: MenusService,
     private childService: ComidasService,
-    private secondChildService: ComidasMenuService
+    private secondChildService: ComidasMenuService,
+    private thirtdChildService: ComidasMenuIngredienteService
   ) { }
 
   ngOnInit() {
@@ -58,12 +62,40 @@ export class OrdenarComidaComponent implements OnInit {
     this.cargarAll()
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
+  pagarCuenta(data)
+  {
+    $('#Loading').css('display','block')
+    $('#Loading').addClass('in')
+    let formValue = {
+      estado:0,
+      id:data.id
+    }
+    //console.log(data)
+    this.mainService.update(formValue)
+                      .then(response => {
+                        this.cargarAll()
+                        console.clear
+                        $("#editModal .close").click();
+                        this.create('Menu Actualizado exitosamente')
+                        $('#Loading').css('display','none')
+                      }).catch(error => {
+                        console.clear
+                        this.createError(error)
+                        $('#Loading').css('display','none')
+                      })
+  }
   cargarAll(){
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
     this.mainService.getAllByCuenta(this.idMesa)
                       .then(response => {
                         this.Table = response
+                        console.log(response.length);
+                        this.canti=response.length+1;
                         $('#Loading').css('display','none')
                         console.clear
                       }).catch(error => {
@@ -78,6 +110,9 @@ export class OrdenarComidaComponent implements OnInit {
     $('#Loading').addClass('in')
     formValue.cuenta = this.idMesa;
     formValue.costo = 0;
+    if(formValue.nombre==''){
+      formValue.nombre = "Mesa "+this.canti;
+    }
     this.mainService.create(formValue)
                       .then(response => {
                         this.cargarAll()
@@ -112,6 +147,7 @@ export class OrdenarComidaComponent implements OnInit {
                           $('#Loading').css('display','none')
                         }).catch(error => {
                           console.clear
+                          data.agregado=0
                           this.createError(error)
                           $('#Loading').css('display','none')
                         })
@@ -124,10 +160,64 @@ export class OrdenarComidaComponent implements OnInit {
                           $('#Loading').css('display','none')
                         }).catch(error => {
                           console.clear
+                          data.agregado=1
                           this.createError(error)
                           $('#Loading').css('display','none')
                         })
     }
+  }
+  quitarIngrediente(data)
+  {
+
+    let formValue = {
+      comida_menu: data.parentId,
+      ingrediente: data.ingrediente.id
+    }
+
+    if(data.agregado==0){
+      data.agregado=1
+      this.thirtdChildService.create(formValue)
+                        .then(response => {
+                          data.addId = response.id
+                          console.clear
+                          this.create('Menu Ingresado')
+                          $('#Loading').css('display','none')
+                        }).catch(error => {
+                          console.clear
+                          data.agregado=0
+                          this.createError(error)
+                          $('#Loading').css('display','none')
+                        })
+    }else{
+      data.agregado=0
+      this.thirtdChildService.delete(data.addId)
+                        .then(response => {
+                          console.clear
+                          this.create('Menu Ingresado')
+                          $('#Loading').css('display','none')
+                        }).catch(error => {
+                          console.clear
+                          data.agregado=1
+                          this.createError(error)
+                          $('#Loading').css('display','none')
+                        })
+    }
+  }
+  agregarIngredientes(data)
+  {
+      this.secondChildService.getIngredientes(data.addId,data.id)
+                        .then(response => {
+                          this.ingredientes =  response;
+                          // console.log(response);
+
+                          console.clear
+                          $('#Loading').css('display','none')
+                        }).catch(error => {
+                          console.clear
+                          this.createError(error)
+                          $('#Loading').css('display','none')
+                        })
+
   }
   cargarSingle(data){
     $('#Loading').css('display','block')

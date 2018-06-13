@@ -21,6 +21,7 @@ import { IngredientesComponent } from './ingredientes/ingredientes.component';
 import { MesasComponent } from './mesas/mesas.component';
 import { OrdenarComidaComponent } from './ordenar-comida/ordenar-comida.component';
 import { MenusComponent } from './menus/menus.component';
+import { CuentasPagadasComponent } from './cuentas-pagadas/cuentas-pagadas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -42,7 +43,8 @@ const routes: Routes = [
     { path: 'ordenar/:id/:nombre', component: OrdenarComidaComponent },
     { path: 'perfil', component: PerfilComponent },
     { path: 'sucursales', component: SucursalesComponent },
-    { path: 'menus', component: MenusComponent }
+    { path: 'menus', component: MenusComponent },
+    { path: 'cuentas-pagadas', component: CuentasPagadasComponent }
   ]},
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
