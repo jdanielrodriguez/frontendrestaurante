@@ -22,6 +22,7 @@ import { MesasComponent } from './mesas/mesas.component';
 import { OrdenarComidaComponent } from './ordenar-comida/ordenar-comida.component';
 import { MenusComponent } from './menus/menus.component';
 import { CuentasPagadasComponent } from './cuentas-pagadas/cuentas-pagadas.component';
+import { CocinaComponent } from './cocina/cocina.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -37,6 +38,7 @@ const routes: Routes = [
     { path: 'comida-ingredientes', component: ComidaIngredientesComponent },
     { path: 'combo-ingredientes', component: ComboIngredientesComponent },
     { path: 'cuentas', component: CuentasComponent },
+    { path: 'cocina', component: CocinaComponent },
     { path: 'estadistica', component: EstadisticaComponent },
     { path: 'ingredientes', component: IngredientesComponent },
     { path: 'mesas', component: MesasComponent },

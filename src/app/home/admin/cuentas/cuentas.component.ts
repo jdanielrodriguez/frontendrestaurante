@@ -44,7 +44,7 @@ export class CuentasComponent implements OnInit {
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
     let formValue = {
-      estado:2,
+      estado:3,
       id:data.id
     }
 

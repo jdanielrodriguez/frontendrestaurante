@@ -45,6 +45,7 @@ import { OrdenarComidaComponent } from './ordenar-comida/ordenar-comida.componen
 import { ComboIngredientesComponent } from './combo-ingredientes/combo-ingredientes.component';
 import { MenusComponent } from './menus/menus.component';
 import { CuentasPagadasComponent } from './cuentas-pagadas/cuentas-pagadas.component';
+import { CocinaComponent } from './cocina/cocina.component';
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { CuentasPagadasComponent } from './cuentas-pagadas/cuentas-pagadas.compo
     ComboIngredientesComponent,
     MenusComponent,
     CuentasPagadasComponent,
+    CocinaComponent,
   ],
   providers: [
     EmployeesService,

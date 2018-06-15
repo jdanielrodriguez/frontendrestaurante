@@ -35,6 +35,17 @@ return Promise.reject(error.message || error)
                         .catch(this.handleError)
     }
 
+    getAllCocina():Promise<any> {
+      let url = `${this.basePath}/api/cocina/menus`
+        return this.http.get(url)
+                        .toPromise()
+                          .then(response => {
+                            //console.log(response.json())
+                            return response.json()
+                          })
+                          .catch(this.handleError)
+      }
+
     getAllByCuenta(id:number):Promise<any> {
       let url = `${this.basePath}/api/menus/cuenta/${id}`
         return this.http.get(url)

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { CuentasService } from "./../_services/cuentas.service";
 import { ComidasService } from "./../_services/comidas.service";
 import { MenusService } from "./../_services/menus.service";
 import { ComidasMenuService } from "./../_services/comidas-menu.service";
@@ -14,11 +15,11 @@ import 'rxjs/add/operator/switchMap';
 declare var $: any
 
 @Component({
-  selector: 'app-ordenar-comida',
-  templateUrl: './ordenar-comida.component.html',
-  styleUrls: ['./ordenar-comida.component.css']
+  selector: 'app-cocina',
+  templateUrl: './cocina.component.html',
+  styleUrls: ['./cocina.component.css']
 })
-export class OrdenarComidaComponent implements OnInit {
+export class CocinaComponent implements OnInit {
   @Input() id:any;
   Table:any
   comidas:any
@@ -44,21 +45,12 @@ export class OrdenarComidaComponent implements OnInit {
     private mainService: MenusService,
     private childService: ComidasService,
     private secondChildService: ComidasMenuService,
-    private thirtdChildService: ComidasMenuIngredienteService
+    private thirtdChildService: ComidasMenuIngredienteService,
+    private otherChildService: CuentasService
   ) { }
 
   ngOnInit() {
-    this.route.params
-      .switchMap((params: Params) => (params['id']))
-      .subscribe(response => {
-                        this.idMesa+=response
-                    });
-    this.route.params
-      .switchMap((params: Params) => (params['nombre']))
-      .subscribe(response => {
-                        this.nombreMesa+=response
-                    });
-    this.title="Orden para cuenta No. "+this.nombreMesa
+
     this.cargarAll()
   }
 
@@ -71,11 +63,11 @@ export class OrdenarComidaComponent implements OnInit {
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
     let formValue = {
-      estado:0,
+      estado:2,
       id:data.id
     }
     //console.log(data)
-    this.mainService.update(formValue)
+    this.otherChildService.update(formValue)
                       .then(response => {
                         this.cargarAll()
                         console.clear
@@ -91,10 +83,10 @@ export class OrdenarComidaComponent implements OnInit {
   cargarAll(){
     $('#Loading').css('display','block')
     $('#Loading').addClass('in')
-    this.mainService.getAllByCuenta(this.idMesa)
+    this.mainService.getAllCocina()
                       .then(response => {
                         this.Table = response
-                        console.log(response.length);
+                        console.log(response);
                         this.canti=response.length+1;
                         $('#Loading').css('display','none')
                         console.clear
@@ -111,7 +103,7 @@ export class OrdenarComidaComponent implements OnInit {
     formValue.cuenta = this.idMesa;
     formValue.costo = 0;
     if(formValue.nombre==''){
-      formValue.nombre = "Menu "+this.canti;
+      formValue.nombre = "Mesa "+this.canti;
     }
     this.mainService.create(formValue)
                       .then(response => {
@@ -224,7 +216,7 @@ export class OrdenarComidaComponent implements OnInit {
     $('#Loading').addClass('in')
     this.selectedData = data
     let id:number = data.id
-    this.childService.getComidasByMenu(id)
+    this.childService.getAll()
                       .then(response => {
                         this.comidas = response;
                         $('#Loading').css('display','none')
