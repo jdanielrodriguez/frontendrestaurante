@@ -158,7 +158,7 @@
                         <div>
                             <form id="ingrediente-form"  #IngredienteForm="ngForm" (ngSubmit)="update(IngredienteForm.value)">
                               <div class="col-md-6 " style="height:280px;" *ngFor="let data2 of ingredientes">
-                                <div [ngClass]="(data2.agregado==1)?'alert-success':'alert-danger'" class="btn btn-app contenedor" style="height:100%;" (click)="quitarIngrediente(data2)">
+                                <div [ngClass]="(data2.agregado==0)?'alert-success':'alert-danger'" class="btn btn-app contenedor" style="height:100%;" (click)="quitarIngrediente(data2)">
                                           <img *ngIf="!data2.foto" src="http://placehold.it/470x300/B2611C/60FF66&text={{data2.ingrediente.nombre}}" style="height:100%;">
                                           <img *ngIf="data2.foto" src="{{data2.foto}}" style="height:100%;">
                                           <div *ngIf="data2.foto" class="carousel-caption">
