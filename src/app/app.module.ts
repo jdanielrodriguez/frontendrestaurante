@@ -16,14 +16,12 @@ import { LoginComponent } from './login/login.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { RecoveryComponent } from "./recovery/recovery.component";
-import { RegisterComponent } from "./register/register.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RecoveryComponent,
-    RegisterComponent
+    RecoveryComponent
   ],
   imports: [
     BrowserModule,
