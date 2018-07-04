@@ -1,27 +1,23 @@
-# Frontend
+# Restaurantes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Corre el comando `ng serve` para iniciar un servidor de desarrollo en la direccion `http://localhost:4200/` el comando `-p` permite cambiar puerto. La aplicación se recargará automaticamente si haces algun cambio en el codigo .
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Corre el comando `ng generate component component-name` para generar un componente nuevo. Tambien puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Corre el comando `ng build` para hacer build al proyecto. La pagina final se alojara en la carpeta `dist/`. Use la opcion `-prod` para buildear una version de producción.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Corre el comando `ng test` para ejecutar las pruebas unitarias con [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Backend Configuration
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Para configurar el Backend del proyecto debe copiar el archivo `src/app/config.module.ts.example` como `src/app/config.module.ts` y agregar la direccion del Backend
